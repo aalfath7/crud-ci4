@@ -36,4 +36,28 @@ class Post extends Controller
 
         return redirect()->to('/');
     }
+
+    public function edit($id)
+    {
+        $data['post'] = $this->postModel->find($id);
+
+        return view('post-edit', $data);
+    }
+
+    public function update($id)
+    {
+        $this->postModel->update($id, [
+            'title' => $this->request->getPost('title'),
+            'content' => $this->request->getPost('content'),
+        ]);
+
+        return redirect()->to('/');
+    }
+
+    public function delete($id)
+    {
+        $this->postModel->delete($id);
+
+        return redirect()->to('/');
+    }
 }
